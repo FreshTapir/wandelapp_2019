@@ -2,7 +2,7 @@ import mapboxgl from 'mapbox-gl';
 
 class Mapboxgl {
     constructor(){
-        mapboxgl.accessToken = '<API KEY NOOIT UPLOADEN>';
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZnJlc2h0YXBpciIsImEiOiJjanZtYWVvcHcxNnkyNDRzMmJtaGRuZGszIn0.CbH9odfjC-COEKvEqbdJdw';
         return new mapboxgl.Map({
             container: 'map', // container id
             style: 'mapbox://styles/mapbox/streets-v8',

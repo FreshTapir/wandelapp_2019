@@ -4,6 +4,21 @@ html {
 }
 body {
     line-height: 1.4em;
+    color: white;
+}
+a {
+    color: white;
+}
+hr{
+    margin-left: 10vw;
+    margin-right: 10vw;
+    border-style: solid;
+    background-color: white;
+    border-width: 1px;
+}
+#smol{
+    margin-left: 25vw;
+    margin-right: 25vw;
 }
  /*#accordion {*/
      /*background-color: #eee;*/
@@ -17,27 +32,40 @@ body {
     line-height: 1.2em;
     display:none;
     margin-bottom: 2em;
-}
-#accordion h1, #info h1{
-    margin-bottom: 0.6em;
-    font-size: 1.4em;
-    color: #cd1143;
+
 }
 #map {
     height: 100vh;
 }
-#upload {
+#info{
+margin-top: 20%;
+}
+.bottemlogo,#upload {
     overflow-y: auto;
     transition: opacity .5s;
-    opacity: 1;
     box-sizing: border-box;
     position: absolute;
+    background-image: url("../img/shapes/two.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
     bottom: 0;
-    height: 15vw;
     width: 100vw;
-    background-color: #ddd;
-    padding: 1em;
     z-index: 102;
+    text-align: center;
+    font-size: 24px;
+
+}
+#one{
+    height: 20vh;
+    transition: height 2s;
+}
+#two{
+    height: 90vh;
+    transition: height 2s;
+}
+#routes_off{
+    transition: height 2s;
 }
  .marker {
      display: block;
@@ -46,4 +74,18 @@ body {
      background-size: contain;
      width:20px;
      height:20px;
+ }
+ #wrapper{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+#chosenroute{
+    display: none;
+}
+.menuitem{
+    margin-top: 6vh;
+}
+#file-input{
+    margin: 0 auto;
  }
