@@ -2,7 +2,7 @@ import mapboxgl from 'mapbox-gl';
 
 class Mapboxgl {
     constructor(){
-        mapboxgl.accessToken = '<API KEY HERE>';
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZnJlc2h0YXBpciIsImEiOiJjanZtYWVvcHcxNnkyNDRzMmJtaGRuZGszIn0.CbH9odfjC-COEKvEqbdJdw';
         return new mapboxgl.Map({
             container: 'map', // container id
             style: 'mapbox://styles/mapbox/streets-v8',
@@ -21,6 +21,20 @@ export default class Map {
         this.youarehere = null;
         this.el = document.createElement('div');
         this.el.className = 'marker';
+        const layerList = document.getElementById('icons');
+        const inputs = layerList.getElementsByTagName('input');
+        let map = this.map;
+        map.addControl(new mapboxgl.NavigationControl());
+        map.scrollZoom.disable();
+
+        function switchLayer(layer) {
+            let layerId = layer.target.id;
+            map.setStyle('mapbox://styles/mapbox/' + layerId);
+        }
+
+        for (let i = 0; i < inputs.length; i++) {
+            inputs[i].onclick = switchLayer;
+        }
 
 
         this.map.on('click', function (e) {

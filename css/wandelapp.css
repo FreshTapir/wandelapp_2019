@@ -1,3 +1,4 @@
+
 html {
     font-family: Arial;
     font-size: 16px;
@@ -5,6 +6,8 @@ html {
 body {
     line-height: 1.4em;
     color: white;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 a {
     color: white;
@@ -32,7 +35,6 @@ hr{
     line-height: 1.2em;
     display:none;
     margin-bottom: 2em;
-
 }
 #map {
     height: 100vh;
@@ -83,9 +85,24 @@ margin-top: 20%;
 #chosenroute{
     display: none;
 }
-.menuitem{
-    margin-top: 6vh;
+.menuitem, .item{
+    margin-top: 9%;
 }
 #file-input{
     margin: 0 auto;
  }
+.uploadbutton{
+    padding: 0 auto;
+}
+#handleiding{
+    display: none;
+}
+#faq{
+    display: none;
+}
+#text{
+    font-size: 12px;
+}
+#contact{
+    display: none;
+}

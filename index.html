@@ -4,41 +4,79 @@
         <meta charset="utf-8"/>
         <title>Wandelapp</title>
         <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
     </head>
     <body>
-
-        <!-- should be run on localhost -->
 
         <!-- Ractive template -->
         <script id='template' type='text/ractive'>
 
             <!-- Mapbox -->
             <div id='map'>
-                <div class="icons"></div>
+                <div id="icons">
+                    <input id='streets-v8' type='radio' name='rtoggle' value='streets' checked='checked'>
+                    <label for='streets'>streets</label>
+                    <input id='satellite-v9' type='radio' name='rtoggle' value='satellite'>
+                    <label for='satellite'>satellite</label>
+                </div>
             </div>
             <div class="bottemlogo" id="one">
                 <h1 id="info" onclick="ay()">Wandelen met Pietje Puk</h1>
+                <hr class="menuitem" id="hrtop">
                 <div id="wrapper" style="display:none">
                     <div class="selectroutewrapper">
-                        <hr class="menuitem">
                         <p class="menuitem" id="chosenroute">chosen route</p>
                         <h2 class="menuitem">Kies een nieuwe route:</h2>
-                        <input on-change="uploadgpx" type="file" id="file-input" />
+                        <div class="uploadbutton"><input on-change="uploadgpx" type="file" id="file-input"/></div>
                         <hr id="smol">
                         <h2 class="menuitem" id="routes_off" onclick="showRoutes()">Klik hier voor bestaande routes.</h2>
+
                             <div id="routeswrapper" style="display:none">
-
-
+                                <div id="accordion">
+                                    {{#each hikes}}
+                                    <h1 on-click="['collapse', data._id, this]">wandeling {{data.json.features.0.properties.name}}</h1>
+                                    <div class="item" id="route{{data._id}}">
+                                    {{data.json.features.0.properties.desc}}
+                                </div>
+                            {{/each}}
                             </div>
+                          </div>
                         <hr class="menuitem">
                     </div>
                     <div class="menuwrapper">
                         <ul>
-                            <li class="menuitem" id="uit"><a href="">Onze Handleiding</a></li>
-                            <li class="menuitem"><a href="">Over ons & Veelgestelde vragen</a></li>
-                            <li class="menuitem"><a href="">Contact met ons</a></li>
+                            <li class="menuitem" id="hand_off" onclick="displayHand()">Onze handleiding</li>
+                            <li class="menuitem" id="faq_off" onclick="displayFAQ()">Over ons & Veelgestelde vragen</li>
+                            <li class="menuitem" id="contact_off" onclick="displayContact()">Contact met ons</li>
                         </ul>
                     </div>
+                </div>
+                <div id="handleiding">
+                    <div class="menuitem" id="hand_on" onclick="displayHand()">Terug</div>
+                    <h1 class="menuitem">Onze handleiding</h1>
+                    <p class="menuitem" id="text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nec eros id nibh bibendum rutrum. Mauris laoreet lorem risus, ut vulputate turpis ullamcorper condimentum. Curabitur egestas, mauris eget posuere blandit, orci dolor aliquam eros, ut sagittis neque massa vulputate nisl. Suspendisse potenti. Pellentesque non nisi in orci porttitor sagittis id ac sem. Donec tristique metus vitae finibus mattis. Etiam nec viverra lorem. Vivamus scelerisque neque eu neque eleifend accumsan. Phasellus molestie dolor ac fermentum rutrum. Pellentesque eu congue turpis. Cras tempor odio turpis, sit amet efficitur enim posuere vitae. Suspendisse potenti. Sed id ante imperdiet, gravida nulla in, ullamcorper mauris. Nullam quam orci, posuere at metus quis, pharetra porttitor urna. Vivamus eget semper eros. Mauris a pharetra sapien.
+
+                        Suspendisse quis odio viverra lacus placerat dictum. Ut et molestie libero. Vestibulum at dui eu risus efficitur condimentum eget quis arcu. Curabitur vitae risus vitae leo lobortis accumsan a a ante. Curabitur id consectetur augue, quis consequat eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse cursus purus eget risus semper, ut vehicula neque malesuada. Aliquam condimentum leo eros, sed tristique tortor elementum sed.
+                    </p>
+                </div>
+                <div id="faq">
+                    <div class="menuitem" id="faq_on" onclick="displayFAQ()">Terug</div>
+                    <h1 class="menuitem">Over ons & Veelgestelde vragen</h1>
+                    <p class="menuitem" id="text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nec eros id nibh bibendum rutrum. Mauris laoreet lorem risus, ut vulputate turpis ullamcorper condimentum. Curabitur egestas, mauris eget posuere blandit, orci dolor aliquam eros, ut sagittis neque massa vulputate nisl. Suspendisse potenti. Pellentesque non nisi in orci porttitor sagittis id ac sem. Donec tristique metus vitae finibus mattis. Etiam nec viverra lorem. Vivamus scelerisque neque eu neque eleifend accumsan. Phasellus molestie dolor ac fermentum rutrum. Pellentesque eu congue turpis. Cras tempor odio turpis, sit amet efficitur enim posuere vitae. Suspendisse potenti. Sed id ante imperdiet, gravida nulla in, ullamcorper mauris. Nullam quam orci, posuere at metus quis, pharetra porttitor urna. Vivamus eget semper eros. Mauris a pharetra sapien.
+
+                        Suspendisse quis odio viverra lacus placerat dictum. Ut et molestie libero. Vestibulum at dui eu risus efficitur condimentum eget quis arcu. Curabitur vitae risus vitae leo lobortis accumsan a a ante. Curabitur id consectetur augue, quis consequat eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse cursus purus eget risus semper, ut vehicula neque malesuada. Aliquam condimentum leo eros, sed tristique tortor elementum sed.
+                    </p>
+                </div>
+                <div id="contact">
+                    <div class="menuitem" id="contact_on" onclick="displayContact()">Terug</div>
+                    <h1 class="menuitem">Contact met ons</h1>
+                    <p class="menuitem" id="text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nec eros id nibh bibendum rutrum. Mauris laoreet lorem risus, ut vulputate turpis ullamcorper condimentum. Curabitur egestas, mauris eget posuere blandit, orci dolor aliquam eros, ut sagittis neque massa vulputate nisl. Suspendisse potenti. Pellentesque non nisi in orci porttitor sagittis id ac sem. Donec tristique metus vitae finibus mattis. Etiam nec viverra lorem. Vivamus scelerisque neque eu neque eleifend accumsan. Phasellus molestie dolor ac fermentum rutrum. Pellentesque eu congue turpis. Cras tempor odio turpis, sit amet efficitur enim posuere vitae. Suspendisse potenti. Sed id ante imperdiet, gravida nulla in, ullamcorper mauris. Nullam quam orci, posuere at metus quis, pharetra porttitor urna. Vivamus eget semper eros. Mauris a pharetra sapien.
+
+                        Suspendisse quis odio viverra lacus placerat dictum. Ut et molestie libero. Vestibulum at dui eu risus efficitur condimentum eget quis arcu. Curabitur vitae risus vitae leo lobortis accumsan a a ante. Curabitur id consectetur augue, quis consequat eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse cursus purus eget risus semper, ut vehicula neque malesuada. Aliquam condimentum leo eros, sed tristique tortor elementum sed.
+                    </p>
                 </div>
             </div>
         </script>
@@ -52,4 +90,3 @@
         <script src="js/wandelapp.js"></script>
     </body>
 </html>
-
